@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+# ── System dependencies (paramiko needs libffi/libssl) ─────────────────────────
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libffi-dev \
+        libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# ── Python dependencies ────────────────────────────────────────────────────────
+WORKDIR /app
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# ── Copy backend source ────────────────────────────────────────────────────────
+COPY backend/ .
+
+# ── Seed data directory ────────────────────────────────────────────────────────
+# machines.json is written at runtime; seed it from the bundled copy so a fresh
+# volume starts with the correct structure. If a volume already has machines.json
+# it will take precedence (Docker volumes overlay the container's filesystem).
+RUN mkdir -p /app/data \
+    && cp /app/machines.json /app/data/machines.json
+
+EXPOSE 4000
+CMD ["python", "app.py"]

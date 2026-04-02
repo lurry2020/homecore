@@ -1,0 +1,17 @@
+[Unit]
+Description=Homelab Dashboard Backend
+After=network.target
+
+[Service]
+Type=simple
+User=jaxraven
+WorkingDirectory=/var/www/html/dashboard/backend
+EnvironmentFile=-/etc/default/homelab-backend
+Environment=HOMELAB_PORT=4000
+Environment=HOMELAB_POLL_INTERVAL=30
+ExecStart=/var/www/html/dashboard/backend/.venv/bin/python /var/www/html/dashboard/backend/app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

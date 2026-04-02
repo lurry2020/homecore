@@ -1,0 +1,5 @@
+flask
+paramiko
+psutil
+docker
+cryptography

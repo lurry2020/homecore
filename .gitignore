@@ -1,0 +1,14 @@
+# Runtime data — never commit
+data/
+backend/data/
+backend/__pycache__/
+backend/*.pyc
+
+# PHP dependencies — installed at build time
+vendor/
+
+# Environment config with secrets
+.env
+
+# Docker build cache
+*.tar

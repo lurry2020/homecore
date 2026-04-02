@@ -1,0 +1,31 @@
+services:
+
+  # ── Web (PHP + Apache) ──────────────────────────────────────────────────────
+  web:
+    image: lurry2020/homecore-web:latest
+    ports:
+      - "${WEB_PORT:-80}:80"
+    volumes:
+      - app_data:/var/www/html/dashboard2/data
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ── Backend (Python / Flask) ────────────────────────────────────────────────
+  backend:
+    image: lurry2020/homecore-backend:latest
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    volumes:
+      - backend_data:/app/data
+    environment:
+      HOMELAB_HOST: "0.0.0.0"
+      HOMELAB_PORT: "${BACKEND_PORT:-4000}"
+      HOMELAB_POLL_INTERVAL: "${POLL_INTERVAL:-30}"
+      HOMELAB_SSH_TIMEOUT: "${SSH_TIMEOUT:-10}"
+      # HOMELAB_SECRET_KEY: "change-me-to-a-long-random-string"
+    restart: unless-stopped
+
+volumes:
+  app_data:
+  backend_data:

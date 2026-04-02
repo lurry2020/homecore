@@ -1,0 +1,5 @@
+# Process .html files as PHP so auth_gate.php is prepended to them
+AddHandler application/x-httpd-php .html .htm
+
+# Prepend auth check to every PHP/HTML request in this directory tree
+php_value auto_prepend_file /var/www/html/dashboard3/api/auth_gate.php

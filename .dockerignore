@@ -1,0 +1,25 @@
+# Version control
+.git
+.gitignore
+
+# Python cache
+backend/__pycache__
+backend/*.pyc
+
+# Runtime data — these are created fresh in Docker volumes
+data/*.db
+data/machine-notes/
+data/llm-context/
+data/weather-cache.json
+data/calendar-cache.json
+
+# Docker files themselves
+Dockerfile
+Dockerfile.backend
+docker-compose.yml
+.dockerignore
+.env
+
+# Docs
+*.md
+backend/README.md

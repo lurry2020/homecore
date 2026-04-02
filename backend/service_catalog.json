@@ -1,0 +1,497 @@
+[
+  {
+    "name": "Pi-hole",
+    "type": "DNS",
+    "port_only": false,
+    "ports": [53],
+    "processes": ["pihole-ftl", "lighttpd", "dnsmasq"],
+    "containers": ["pihole"],
+    "images": ["pihole/pihole"]
+  },
+  {
+    "name": "Unbound",
+    "type": "DNS",
+    "port_only": false,
+    "ports": [53, 5335],
+    "processes": ["unbound"],
+    "containers": ["unbound"],
+    "images": ["mvance/unbound", "klutchell/unbound"]
+  },
+  {
+    "name": "AdGuard Home",
+    "type": "DNS",
+    "port_only": false,
+    "ports": [53, 3000],
+    "processes": ["adguardhome"],
+    "containers": ["adguard"],
+    "images": ["adguard/adguardhome"]
+  },
+  {
+    "name": "Nginx Proxy Manager",
+    "type": "Web",
+    "port_only": false,
+    "ports": [80, 81, 443],
+    "processes": ["nginx-proxy-manager"],
+    "containers": ["nginx-proxy-manager", "npm"],
+    "images": ["jc21/nginx-proxy-manager"]
+  },
+  {
+    "name": "Traefik",
+    "type": "Web",
+    "port_only": false,
+    "ports": [80, 443, 8080],
+    "processes": ["traefik"],
+    "containers": ["traefik"],
+    "images": ["traefik"]
+  },
+  {
+    "name": "Nextcloud",
+    "type": "Storage",
+    "port_only": false,
+    "ports": [],
+    "processes": ["nextcloud"],
+    "containers": ["nextcloud"],
+    "images": ["nextcloud"]
+  },
+  {
+    "name": "Vaultwarden",
+    "type": "Security",
+    "port_only": false,
+    "ports": [8080],
+    "processes": ["vaultwarden", "bitwarden_rs"],
+    "containers": ["vaultwarden", "bitwarden"],
+    "images": ["vaultwarden/server"]
+  },
+  {
+    "name": "Portainer",
+    "type": "Infrastructure",
+    "port_only": false,
+    "ports": [9000, 9443],
+    "processes": ["portainer"],
+    "containers": ["portainer"],
+    "images": ["portainer/portainer-ce", "portainer/agent"]
+  },
+  {
+    "name": "Grafana",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [3000],
+    "processes": ["grafana"],
+    "containers": ["grafana"],
+    "images": ["grafana/grafana"]
+  },
+  {
+    "name": "Prometheus",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [9090],
+    "processes": ["prometheus"],
+    "containers": ["prometheus"],
+    "images": ["prom/prometheus"]
+  },
+  {
+    "name": "Zabbix",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [10050, 10051],
+    "processes": ["zabbix_server", "zabbix-agent", "zabbix_agentd"],
+    "containers": ["zabbix"],
+    "images": ["zabbix"]
+  },
+  {
+    "name": "Uptime Kuma",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [3001],
+    "processes": ["uptime-kuma"],
+    "containers": ["uptime-kuma"],
+    "images": ["louislam/uptime-kuma"]
+  },
+  {
+    "name": "Netdata",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [19999],
+    "processes": ["netdata"],
+    "containers": ["netdata"],
+    "images": ["netdata/netdata"]
+  },
+  {
+    "name": "Jellyfin",
+    "type": "Media",
+    "port_only": true,
+    "ports": [8096, 8920],
+    "processes": ["jellyfin"],
+    "containers": ["jellyfin"],
+    "images": ["jellyfin/jellyfin"]
+  },
+  {
+    "name": "Plex",
+    "type": "Media",
+    "port_only": true,
+    "ports": [32400],
+    "processes": ["plex", "plexmediaserver"],
+    "containers": ["plex"],
+    "images": ["plexinc/pms-docker", "plex"]
+  },
+  {
+    "name": "Immich",
+    "type": "Media",
+    "port_only": true,
+    "ports": [2283],
+    "processes": ["immich"],
+    "containers": ["immich"],
+    "images": ["ghcr.io/immich-app/immich-server", "immich"]
+  },
+  {
+    "name": "PhotoPrism",
+    "type": "Media",
+    "port_only": false,
+    "ports": [2342],
+    "processes": ["photoprism"],
+    "containers": ["photoprism"],
+    "images": ["photoprism/photoprism"]
+  },
+  {
+    "name": "Paperless-ngx",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [8000],
+    "processes": ["paperless"],
+    "containers": ["paperless", "paperless-webserver"],
+    "images": ["ghcr.io/paperless-ngx/paperless-ngx", "paperless-ngx"]
+  },
+  {
+    "name": "Mealie",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [9000, 9925],
+    "processes": ["mealie"],
+    "containers": ["mealie"],
+    "images": ["ghcr.io/mealie-recipes/mealie"]
+  },
+  {
+    "name": "Gitea",
+    "type": "Development",
+    "port_only": false,
+    "ports": [3000, 2222],
+    "processes": ["gitea"],
+    "containers": ["gitea"],
+    "images": ["gitea/gitea"]
+  },
+  {
+    "name": "Forgejo",
+    "type": "Development",
+    "port_only": false,
+    "ports": [3000, 2222],
+    "processes": ["forgejo"],
+    "containers": ["forgejo"],
+    "images": ["codeberg.org/forgejo/forgejo", "forgejo"]
+  },
+  {
+    "name": "Woodpecker CI",
+    "type": "Development",
+    "port_only": false,
+    "ports": [8000, 9000],
+    "processes": ["woodpecker"],
+    "containers": ["woodpecker"],
+    "images": ["woodpeckerci/woodpecker-server", "woodpeckerci/woodpecker-agent"]
+  },
+  {
+    "name": "n8n",
+    "type": "Automation",
+    "port_only": true,
+    "ports": [5678],
+    "processes": ["n8n"],
+    "containers": ["n8n"],
+    "images": ["n8nio/n8n", "n8n"]
+  },
+  {
+    "name": "Minecraft",
+    "type": "Game",
+    "port_only": true,
+    "ports": [25565, 25575],
+    "processes": ["minecraft", "paper", "spigot", "fabric", "forge"],
+    "containers": ["minecraft", "paper", "spigot"],
+    "images": ["itzg/minecraft-server", "minecraft", "papermc"]
+  },
+  {
+    "name": "Home Assistant",
+    "type": "Automation",
+    "port_only": true,
+    "ports": [8123],
+    "processes": ["home-assistant", "hass"],
+    "containers": ["homeassistant"],
+    "images": ["homeassistant/home-assistant"]
+  },
+  {
+    "name": "Node-RED",
+    "type": "Automation",
+    "port_only": false,
+    "ports": [1880],
+    "processes": ["node-red"],
+    "containers": ["node-red", "nodered"],
+    "images": ["nodered/node-red"]
+  },
+  {
+    "name": "Ollama",
+    "type": "AI",
+    "port_only": true,
+    "ports": [11434],
+    "processes": ["ollama"],
+    "containers": ["ollama"],
+    "images": ["ollama/ollama"]
+  },
+  {
+    "name": "Open WebUI",
+    "type": "AI",
+    "port_only": false,
+    "ports": [],
+    "processes": ["open-webui", "webui"],
+    "containers": ["open-webui"],
+    "images": ["open-webui", "ghcr.io/open-webui/open-webui"]
+  },
+  {
+    "name": "Qdrant",
+    "type": "AI",
+    "port_only": true,
+    "ports": [6333, 6334],
+    "processes": ["qdrant"],
+    "containers": ["qdrant"],
+    "images": ["qdrant/qdrant"]
+  },
+  {
+    "name": "SearXNG",
+    "type": "Search",
+    "port_only": false,
+    "ports": [8888, 8081],
+    "processes": ["searxng", "uwsgi"],
+    "containers": ["searxng"],
+    "images": ["searxng/searxng"]
+  },
+  {
+    "name": "Authentik",
+    "type": "Security",
+    "port_only": false,
+    "ports": [9000, 9443],
+    "processes": ["authentik"],
+    "containers": ["authentik"],
+    "images": ["ghcr.io/goauthentik/server", "goauthentik/server"]
+  },
+  {
+    "name": "Keycloak",
+    "type": "Security",
+    "port_only": false,
+    "ports": [8080, 8443],
+    "processes": ["keycloak"],
+    "containers": ["keycloak"],
+    "images": ["quay.io/keycloak/keycloak", "keycloak"]
+  },
+  {
+    "name": "WireGuard",
+    "type": "Network",
+    "port_only": true,
+    "ports": [51820],
+    "processes": ["wireguard", "wg-quick"],
+    "containers": ["wireguard"],
+    "images": ["wireguard"]
+  },
+  {
+    "name": "Tailscale",
+    "type": "Network",
+    "port_only": false,
+    "ports": [],
+    "processes": ["tailscaled"],
+    "containers": ["tailscale"],
+    "images": ["tailscale/tailscale"]
+  },
+  {
+    "name": "Headscale",
+    "type": "Network",
+    "port_only": false,
+    "ports": [8080],
+    "processes": ["headscale"],
+    "containers": ["headscale"],
+    "images": ["headscale/headscale"]
+  },
+  {
+    "name": "Netbird",
+    "type": "Network",
+    "port_only": false,
+    "ports": [33073],
+    "processes": ["netbird"],
+    "containers": ["netbird"],
+    "images": ["netbirdio/netbird"]
+  },
+  {
+    "name": "Tandoor",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [8080],
+    "processes": ["tandoor", "recipes"],
+    "containers": ["tandoor", "recipes"],
+    "images": ["vabene1111/recipes"]
+  },
+  {
+    "name": "BookStack",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [6875],
+    "processes": ["bookstack"],
+    "containers": ["bookstack"],
+    "images": ["linuxserver/bookstack", "solidnerd/bookstack"]
+  },
+  {
+    "name": "Outline",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [3000],
+    "processes": ["outline"],
+    "containers": ["outline"],
+    "images": ["outlinewiki/outline"]
+  },
+  {
+    "name": "Linkding",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [9090],
+    "processes": ["linkding"],
+    "containers": ["linkding"],
+    "images": ["sissbruecker/linkding"]
+  },
+  {
+    "name": "Stirling PDF",
+    "type": "Productivity",
+    "port_only": false,
+    "ports": [8080],
+    "processes": ["stirling"],
+    "containers": ["stirling"],
+    "images": ["frooodle/s-pdf", "stirling-pdf"]
+  },
+  {
+    "name": "IT-Tools",
+    "type": "Utilities",
+    "port_only": false,
+    "ports": [80, 8080],
+    "processes": ["it-tools"],
+    "containers": ["it-tools"],
+    "images": ["corentinth/it-tools"]
+  },
+  {
+    "name": "Healthchecks",
+    "type": "Monitoring",
+    "port_only": false,
+    "ports": [8000],
+    "processes": ["healthchecks"],
+    "containers": ["healthchecks"],
+    "images": ["linuxserver/healthchecks", "healthchecks/healthchecks"]
+  },
+  {
+    "name": "Gotify",
+    "type": "Notifications",
+    "port_only": false,
+    "ports": [80, 443],
+    "processes": ["gotify"],
+    "containers": ["gotify"],
+    "images": ["gotify/server"]
+  },
+  {
+    "name": "ntfy",
+    "type": "Notifications",
+    "port_only": false,
+    "ports": [80, 443],
+    "processes": ["ntfy"],
+    "containers": ["ntfy"],
+    "images": ["binwiederhier/ntfy"]
+  },
+  {
+    "name": "MinIO",
+    "type": "Storage",
+    "port_only": false,
+    "ports": [9000, 9001],
+    "processes": ["minio"],
+    "containers": ["minio"],
+    "images": ["minio/minio"]
+  },
+  {
+    "name": "Longhorn",
+    "type": "Storage",
+    "port_only": false,
+    "ports": [9500],
+    "processes": ["longhorn"],
+    "containers": ["longhorn"],
+    "images": ["longhornio/longhorn-manager"]
+  },
+  {
+    "name": "Proxmox",
+    "type": "Virtualization",
+    "port_only": true,
+    "ports": [8006],
+    "processes": ["pveproxy", "pvedaemon"],
+    "containers": [],
+    "images": []
+  },
+  {
+    "name": "Cockpit",
+    "type": "System",
+    "port_only": false,
+    "ports": [9090],
+    "processes": ["cockpit-ws"],
+    "containers": ["cockpit"],
+    "images": ["cockpit/ws"]
+  },
+  {
+    "name": "Semaphore",
+    "type": "Development",
+    "port_only": false,
+    "ports": [3000],
+    "processes": ["semaphore"],
+    "containers": ["semaphore"],
+    "images": ["semaphoreui/semaphore"]
+  },
+  {
+    "name": "Docker Engine",
+    "type": "Infrastructure",
+    "port_only": false,
+    "ports": [],
+    "processes": ["dockerd", "docker.service", "containerd"],
+    "containers": [],
+    "images": []
+  },
+  {
+    "name": "Rclone",
+    "type": "Storage",
+    "port_only": false,
+    "ports": [5572],
+    "processes": ["rclone"],
+    "containers": ["rclone"],
+    "images": ["rclone/rclone"]
+  },
+  {
+    "name": "Nginx",
+    "type": "Web",
+    "port_only": false,
+    "ports": [],
+    "processes": ["nginx"],
+    "containers": ["nginx"],
+    "images": ["nginx", "nginxinc/nginx-unprivileged"]
+  },
+  {
+    "name": "Apache2",
+    "type": "Web",
+    "port_only": false,
+    "ports": [],
+    "processes": ["apache2", "httpd"],
+    "containers": ["apache", "httpd"],
+    "images": ["httpd", "apache"]
+  },
+  {
+    "name": "Caddy",
+    "type": "Web",
+    "port_only": false,
+    "ports": [80, 443, 2019],
+    "processes": ["caddy"],
+    "containers": ["caddy"],
+    "images": ["caddy"]
+  }
+]
